@@ -1,0 +1,8 @@
+I just needed to do this same thing and came up with the following one-liner:
+
+Warning: This will delete all of your buckets/files that you have access to. Make sure you really need to do this before running this script!
+
+aws s3 ls | cut -d" " -f 3 | xargs -I{} aws s3 rb s3://{} --force
+
+If you only want to remove empty buckets remove the --force flag:
+aws s3 ls | cut -d" " -f 3 | xargs -I{} aws s3 rb s3://{}
